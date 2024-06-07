@@ -42,7 +42,7 @@ const ProjectList = () => {
           <Card className="p-5 sticky top-10">
             <div className="flex justify-between lg:w-[20rem]">
               <p className="text-xl -tracking-wider">filters</p>
-              <Button varient="ghost" size="icon">
+              <Button variant="ghost" size="icon">
                 <MixerHorizontalIcon />
               </Button>
             </div>
