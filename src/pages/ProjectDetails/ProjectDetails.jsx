@@ -11,6 +11,8 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlusIcon } from "@radix-ui/react-icons";
 import InviteUserForm from "./InviteUserForm";
+import IssueList from "../Issues/IssueList";
+import ChatBox from "./ChatBox";
 
 const ProjectDetails = () => {
   const handleProjectInvitation = () => {};
@@ -70,8 +72,20 @@ const ProjectDetails = () => {
                   <Badge>Pratik</Badge>
                 </div>
               </div>
+
+              <section>
+                <p className="py-5 border-b text-lg -tracking-wider">Tasks</p>
+                <div className="lg:flex md:flex gap-3 justify-between py-5">
+                  <IssueList status="pending" title="Todo List" />
+                  <IssueList status="in_progress" title="In progress" />
+                  <IssueList status="done" title="Done" />
+                </div>
+              </section>
             </div>
           </ScrollArea>
+          <div>
+            <ChatBox />
+          </div>
         </div>
       </div>
     </>
