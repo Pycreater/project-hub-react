@@ -10,6 +10,7 @@ import {
 } from "@radix-ui/react-icons";
 import { useState } from "react";
 import ProjectCard from "../Project/ProjectCard";
+import { useSelector } from "react-redux";
 
 export const tags = [
   "all",
@@ -26,15 +27,16 @@ export const tags = [
 ];
 
 const ProjectList = () => {
-  const [keyword, setKeyword]=useState("");
+  const [keyword, setKeyword] = useState("");
+  const { project } = useSelector((store) => store);
   const handleFilterChange = (section, value) => {
     console.log("value", value, section);
   };
 
   const handleSearchChange = (e) => {
-    setKeyword(e.target.value)
+    setKeyword(e.target.value);
   };
-
+  console.log("project store", project);
   return (
     <>
       <div className="relative px-5 lg:px-0 lg:flex gap-5 justify-center py-5">
@@ -116,9 +118,9 @@ const ProjectList = () => {
           </div>
           <div>
             <div className="space-y-5 min-h-[74vh]">
-              {
-                keyword?[1,1,1].map((item)=><ProjectCard key={item} />) : [1,1,1,1].map((item)=><ProjectCard key={item} />)
-              }
+              {keyword
+                ? [1, 1, 1].map((item) => <ProjectCard key={item} />)
+                : project.projects?.map((item) => <ProjectCard key={item} />)}
             </div>
           </div>
         </section>

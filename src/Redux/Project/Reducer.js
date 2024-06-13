@@ -37,7 +37,7 @@ export const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        projects: action.payload,
+        projects: action.projects,
         error: null,
       };
 
@@ -76,6 +76,6 @@ export const projectReducer = (state = initialState, action) => {
       };
 
     default:
-      state;
+      return state;
   }
 };

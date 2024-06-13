@@ -21,7 +21,7 @@ export const fetchProject =
   async (dispatch) => {
     dispatch({ type: FETCH_PROJECTS_REQUEST });
     try {
-      const { data } = await api.get("api/projects", {
+      const { data } = await api.get("/api/projects", {
         params: { category, tag },
       });
       console.log("all projects", data);
@@ -34,7 +34,7 @@ export const fetchProject =
 export const searchProject = (keyword) => async (dispatch) => {
   dispatch({ type: SEARCH_PROJECT_REQUEST });
   try {
-    const { data } = await api.get("api/projects/search?keyword=" + keyword);
+    const { data } = await api.get("/api/projects/search?keyword=" + keyword);
     console.log("search projects", data);
     dispatch({ type: SEARCH_PROJECT_SUCCESS, projects: data });
   } catch (error) {
@@ -45,18 +45,18 @@ export const searchProject = (keyword) => async (dispatch) => {
 export const createProject = (projectData) => async (dispatch) => {
   dispatch({ type: CREATE_PROJECT_REQUEST });
   try {
-    const { data } = await api.post("api/projects/", projectData);
+    const { data } = await api.post("/api/projects", projectData);
     console.log("create project", data);
     dispatch({ type: CREATE_PROJECT_SUCCESS, project: data });
   } catch (error) {
-    console.log(error);
+    console.log("error ",error);
   }
 };
 
 export const fetchProjectById = (id) => async (dispatch) => {
   dispatch({ type: FETCH_PROJECT_BY_ID_REQUEST });
   try {
-    const { data } = await api.get("api/projects/" + id);
+    const { data } = await api.get("/api/projects" + id);
     console.log("project", data);
     dispatch({ type: FETCH_PROJECT_BY_ID_SUCCESS, project: data });
   } catch (error) {
@@ -69,7 +69,7 @@ export const deleteProject =
   async (dispatch) => {
     dispatch({ type: DELETE_PROJECT_REQUEST });
     try {
-      const { data } = await api.delete("api/projects/" + projectId, projectId);
+      const { data } = await api.delete("/api/projects/" + projectId, projectId);
       console.log("delete project", data);
       dispatch({ type: DELETE_PROJECT_SUCCESS, projectId });
     } catch (error) {
@@ -82,7 +82,7 @@ export const inviteToProject =
   async (dispatch) => {
     dispatch({ type: INVITE_TO_PROJECT_REQUEST });
     try {
-      const { data } = await api.post("api/projects/invite", {
+      const { data } = await api.post("/api/projects/invite", {
         email,
         projectId,
       });
@@ -98,7 +98,7 @@ export const acceptInvitation =
   async (dispatch) => {
     dispatch({ type: ACCEPT_INVITATION_REQUEST });
     try {
-      const { data } = await api.get("api/projects/accept_invitation", {
+      const { data } = await api.get("/api/projects/accept_invitation", {
         params: {
           token: invitationToken,
         },

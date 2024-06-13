@@ -29,7 +29,7 @@ export const register = (userData) => async (dispatch) => {
 export const login = (userData) => async (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
   try {
-    const { data } = await axios.post(`${API_BASE_URL}/auth/signin`, userData);
+    const { data } = await axios.post(`${API_BASE_URL}/auth/signing`, userData);
 
     if (data.jwt) {
       localStorage.setItem("jwt", data.jwt);
@@ -51,12 +51,12 @@ export const getUser = () => async (dispatch) => {
       },
     });
 
-    if (data.jwt) {
-      localStorage.setItem("jwt", data.jwt);
+    // if (data.jwt) {
+    //   localStorage.setItem("jwt", data.jwt);
       dispatch({ type: GET_USER_SUCCESS, payload: data });
-    }
+    // }
 
-    console.log("login success!", data);
+    console.log("user success!", data);
   } catch (error) {
     console.log(error);
   }

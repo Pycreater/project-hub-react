@@ -14,14 +14,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/Redux/Auth/Action";
 
 const Navbar = () => {
+  const { auth } = useSelector((store) => store);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const navigate = useNavigate(); 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <div className="border-b py-4 px-5 flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <p onClick={() => navigate("/")} className="cursor-pointer">Project Management</p>
+        <p onClick={() => navigate("/")} className="cursor-pointer">
+          Project Management
+        </p>
         <Dialog>
           <DialogTrigger>
             <Button variant="ghost">New Project</Button>
@@ -32,7 +41,9 @@ const Navbar = () => {
             <CreateProjectForm />
           </DialogContent>
         </Dialog>
-        <Button onClick={() => navigate("/upgrade_plan")} variant="ghost">Upgrade</Button>
+        <Button onClick={() => navigate("/upgrade_plan")} variant="ghost">
+          Upgrade
+        </Button>
       </div>
 
       <div className="flex gap-3 items-center">
@@ -47,10 +58,10 @@ const Navbar = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <p>Pratik</p>
+        <p>{auth.user?.fullName}</p>
       </div>
     </div>
   );

@@ -64,7 +64,7 @@ const issueReducer = (state = initialState, action) => {
         error: action.error,
       };
     default:
-      return status;
+      return state;
   }
 };
 
