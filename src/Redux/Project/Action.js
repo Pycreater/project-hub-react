@@ -35,7 +35,7 @@ export const searchProject = (keyword) => async (dispatch) => {
   dispatch({ type: SEARCH_PROJECT_REQUEST });
   try {
     const { data } = await api.get("/api/projects/search?keyword=" + keyword);
-    console.log("search projects", data);
+    console.log("search projects----", data);
     dispatch({ type: SEARCH_PROJECT_SUCCESS, projects: data });
   } catch (error) {
     console.log(error);
@@ -56,7 +56,7 @@ export const createProject = (projectData) => async (dispatch) => {
 export const fetchProjectById = (id) => async (dispatch) => {
   dispatch({ type: FETCH_PROJECT_BY_ID_REQUEST });
   try {
-    const { data } = await api.get("/api/projects" + id);
+    const { data } = await api.get("/api/projects/" + id);
     console.log("project", data);
     dispatch({ type: FETCH_PROJECT_BY_ID_SUCCESS, project: data });
   } catch (error) {

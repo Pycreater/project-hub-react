@@ -19,6 +19,7 @@ export const sendMessage = (messageData) => {
         type: SEND_MESSAGE_SUCCESS,
         message: response.data,
       });
+      console.log("message sent => ", response.data);
     } catch (error) {
       console.log(error);
       dispatch({

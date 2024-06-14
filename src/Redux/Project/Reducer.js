@@ -45,7 +45,7 @@ export const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        searchProjects: action.payload,
+        searchProjects: action.projects,
         error: null,
       };
 
@@ -66,11 +66,12 @@ export const projectReducer = (state = initialState, action) => {
       };
 
     case DELETE_PROJECT_SUCCESS:
+      console.log("------------------",action.projectId);
       return {
         ...state,
         loading: false,
         projects: state.projects.filter(
-          (project) => project.id === action.projectId
+          (project) => project.id !== action.projectId
         ),
         error: null,
       };
