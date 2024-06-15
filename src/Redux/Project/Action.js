@@ -49,7 +49,7 @@ export const createProject = (projectData) => async (dispatch) => {
     console.log("create project", data);
     dispatch({ type: CREATE_PROJECT_SUCCESS, project: data });
   } catch (error) {
-    console.log("error ",error);
+    console.log("error ", error);
   }
 };
 
@@ -69,7 +69,10 @@ export const deleteProject =
   async (dispatch) => {
     dispatch({ type: DELETE_PROJECT_REQUEST });
     try {
-      const { data } = await api.delete("/api/projects/" + projectId, projectId);
+      const { data } = await api.delete(
+        "/api/projects/" + projectId,
+        projectId
+      );
       console.log("delete project", data);
       dispatch({ type: DELETE_PROJECT_SUCCESS, projectId });
     } catch (error) {
@@ -94,16 +97,16 @@ export const inviteToProject =
   };
 
 export const acceptInvitation =
-  ({ invitationToken, navigate }) =>
+  ({ token, navigate }) =>
   async (dispatch) => {
     dispatch({ type: ACCEPT_INVITATION_REQUEST });
     try {
       const { data } = await api.get("/api/projects/accept_invitation", {
         params: {
-          token: invitationToken,
+          token,
         },
       });
-      navigate("/project" + data.projectId);
+      navigate("/project/" + data.projectId);
       console.log("accept invitation", data);
       dispatch({ type: ACCEPT_INVITATION_SUCCESS, payload: data });
     } catch (error) {

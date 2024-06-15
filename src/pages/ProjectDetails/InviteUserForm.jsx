@@ -1,18 +1,30 @@
+import { inviteToProject } from "@/Redux/Project/Action";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const InviteUserForm = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const form = useForm({
     // resolver: zod
     defaultValues: {
-     email: "",
+      email: "",
     },
   });
 
   const onSubmit = (data) => {
+    dispatch(inviteToProject({ email: data.email, projectId: id }));
     console.log("create project data", data);
   };
   return (
@@ -38,15 +50,14 @@ const InviteUserForm = () => {
           />
 
           <DialogClose>
-            
-              <Button type="submit" className="w-full mt-5">
-                Send Email
+            <Button type="submit" className="w-full mt-5">
+              Send Email
             </Button>
           </DialogClose>
         </form>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default InviteUserForm
+export default InviteUserForm;
